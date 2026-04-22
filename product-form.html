@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="product-form-styles.css">
+    <title>FoodLink - Formulario de Producto</title>
+</head>
+<body class="form-body">
+    <!-- CONTENEDOR PRINCIPAL -->
+    <div class="form-container">
+        <!-- CABECERA DEL FORMULARIO -->
+        <div class="form-header">
+            <h1>Nuevo producto</h1>
+            <p class="form-subtitle">Complete la información del producto para añadirlo al catálogo</p>
+        </div>
+
+        <!-- FORMULARIO -->
+        <form class="product-form">
+            <!-- PRIMERA FILA: Nombre y Restaurante -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="product-name">Nombre del producto</label>
+                    <input type="text" id="product-name" name="product-name" placeholder="Hamburguesa BBQ" required>
+                </div>
+                <div class="form-group">
+                    <label for="restaurant">Restaurante asociado</label>
+                    <select id="restaurant" name="restaurant" required>
+                        <option value="">Seleccionar restaurante</option>
+                        <option value="burger-house">Burger House</option>
+                        <option value="pizza-italia">Pizza Italia</option>
+                        <option value="sushi-tokyo">Sushi Tokyo</option>
+                        <option value="thai-spice">Thai Spice</option>
+                        <option value="kebab-express">Kebab Express</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- SEGUNDA FILA: Precio y Stock -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="price">Precio</label>
+                    <div class="input-with-addon">
+                        <input type="number" id="price" name="price" placeholder="9,95" step="0.01" min="0" required>
+                        <span class="addon">€</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="stock">Stock</label>
+                    <input type="number" id="stock" name="stock" placeholder="40" min="0" required>
+                </div>
+            </div>
+
+            <!-- TERCERA FILA: Disponibilidad e Imagen -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="availability">Disponibilidad</label>
+                    <select id="availability" name="availability" required>
+                        <option value="available">Disponible</option>
+                        <option value="unavailable">No disponible</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="image">Imagen del producto</label>
+                    <div class="file-upload">
+                        <input type="file" id="image" name="image" accept="image/*" required>
+                        <button type="button" class="btn-upload" onclick="document.getElementById('image').click()">
+                            📸 Subir imagen
+                        </button>
+                        <span class="file-name" id="file-name">Ningún archivo seleccionado</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CUARTA FILA: Descripción (ancho completo) -->
+            <div class="form-group full-width">
+                <label for="description">Descripción</label>
+                <textarea id="description" name="description" placeholder="Hamburguesa de ternera con salsa barbacoa, queso cheddar, cebolla caramelizada y patatas." rows="5" required></textarea>
+            </div>
+
+            <!-- BOTONES -->
+            <div class="form-actions">
+                <button type="button" class="btn btn-cancel" onclick="window.history.back()">Cancelar</button>
+                <button type="submit" class="btn btn-save">Guardar producto</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Mostrar nombre del archivo seleccionado
+        document.getElementById('image').addEventListener('change', function() {
+            const fileName = this.files[0]?.name || 'Ningún archivo seleccionado';
+            document.getElementById('file-name').textContent = fileName;
+        });
+
+        // Manejo del envío del formulario
+        document.querySelector('.product-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                name: document.getElementById('product-name').value,
+                restaurant: document.getElementById('restaurant').value,
+                price: document.getElementById('price').value,
+                stock: document.getElementById('stock').value,
+                availability: document.getElementById('availability').value,
+                description: document.getElementById('description').value,
+                image: document.getElementById('image').files[0]?.name
+            };
+
+            console.log('Producto guardado:', formData);
+            alert(`Producto "${formData.name}" guardado correctamente.`);
+            // Aquí iría la llamada a la API para guardar el producto
+        });
+    </script>
+</body>
+</html>

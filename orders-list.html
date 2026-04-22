@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="orders-list-styles.css">
+    <title>FoodLink - Listado de Pedidos</title>
+</head>
+<body class="orders-body">
+    <!-- CONTENEDOR PRINCIPAL -->
+    <div class="orders-container">
+        <!-- CABECERA -->
+        <div class="orders-header">
+            <h1>Listado de pedidos</h1>
+            <p class="orders-subtitle">Consulta y supervisión de pedidos registrados en la plataforma</p>
+        </div>
+
+        <!-- ZONA DE FILTROS -->
+        <div class="filters-section">
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="Buscar pedido o usuario" class="search-input">
+                <span class="search-icon">🔍</span>
+            </div>
+
+            <div class="filters-group">
+                <select id="status-filter" class="status-filter">
+                    <option value="">Todos</option>
+                    <option value="pending">Pendiente</option>
+                    <option value="preparing">En preparación</option>
+                    <option value="sent">Enviado</option>
+                    <option value="delivered">Entregado</option>
+                    <option value="cancelled">Cancelado</option>
+                </select>
+
+                <button class="btn-export" onclick="exportTable()">
+                    📥 Exportar
+                </button>
+            </div>
+        </div>
+
+        <!-- TABLA PRINCIPAL -->
+        <div class="table-wrapper">
+            <table class="orders-table">
+                <thead>
+                    <tr>
+                        <th>ID Pedido</th>
+                        <th>Usuario</th>
+                        <th>Fecha</th>
+                        <th>Estado</th>
+                        <th>Total</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="orders-body">
+                    <tr>
+                        <td class="order-id">#1058</td>
+                        <td>Ana Ruiz</td>
+                        <td>12/10/2025</td>
+                        <td><span class="status-badge preparing">En preparación</span></td>
+                        <td class="amount">18,50 €</td>
+                        <td class="actions">
+                            <button class="action-btn view-btn" onclick="viewOrder('#1058')" title="Ver detalle">👁️</button>
+                            <button class="action-btn edit-btn" onclick="changeStatus('#1058')" title="Cambiar estado">🔄</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="order-id">#1057</td>
+                        <td>Carlos Gil</td>
+                        <td>12/10/2025</td>
+                        <td><span class="status-badge delivered">Entregado</span></td>
+                        <td class="amount">24,90 €</td>
+                        <td class="actions">
+                            <button class="action-btn view-btn" onclick="viewOrder('#1057')" title="Ver detalle">👁️</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="order-id">#1056</td>
+                        <td>Marta López</td>
+                        <td>12/10/2025</td>
+                        <td><span class="status-badge pending">Pendiente</span></td>
+                        <td class="amount">13,00 €</td>
+                        <td class="actions">
+                            <button class="action-btn view-btn" onclick="viewOrder('#1056')" title="Ver detalle">👁️</button>
+                            <button class="action-btn edit-btn" onclick="changeStatus('#1056')" title="Cambiar estado">🔄</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="order-id">#1055</td>
+                        <td>Javier Soto</td>
+                        <td>11/10/2025</td>
+                        <td><span class="status-badge cancelled">Cancelado</span></td>
+                        <td class="amount">21,40 €</td>
+                        <td class="actions">
+                            <button class="action-btn view-btn" onclick="viewOrder('#1055')" title="Ver detalle">👁️</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="order-id">#1054</td>
+                        <td>Patricia González</td>
+                        <td>11/10/2025</td>
+                        <td><span class="status-badge sent">Enviado</span></td>
+                        <td class="amount">32,75 €</td>
+                        <td class="actions">
+                            <button class="action-btn view-btn" onclick="viewOrder('#1054')" title="Ver detalle">👁️</button>
+                            <button class="action-btn edit-btn" onclick="changeStatus('#1054')" title="Cambiar estado">🔄</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="order-id">#1053</td>
+                        <td>Roberto Martín</td>
+                        <td>10/10/2025</td>
+                        <td><span class="status-badge pending">Pendiente</span></td>
+                        <td class="amount">19,90 €</td>
+                        <td class="actions">
+                            <button class="action-btn view-btn" onclick="viewOrder('#1053')" title="Ver detalle">👁️</button>
+                            <button class="action-btn edit-btn" onclick="changeStatus('#1053')" title="Cambiar estado">🔄</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- PAGINACIÓN -->
+        <div class="pagination">
+            <button class="pagination-btn" onclick="previousPage()">← Anterior</button>
+            <span class="page-info">Página 1 de 5</span>
+            <button class="pagination-btn" onclick="nextPage()">Siguiente →</button>
+        </div>
+    </div>
+
+    <!-- MODAL PARA VER DETALLE -->
+    <div id="detail-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Detalle del Pedido</h2>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p><strong>ID:</strong> <span id="modal-order-id"></span></p>
+                <p><strong>Usuario:</strong> <span id="modal-user"></span></p>
+                <p><strong>Fecha:</strong> <span id="modal-date"></span></p>
+                <p><strong>Estado:</strong> <span id="modal-status"></span></p>
+                <p><strong>Total:</strong> <span id="modal-total"></span></p>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-modal-close" onclick="closeModal()">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL PARA CAMBIAR ESTADO -->
+    <div id="status-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Cambiar estado del pedido</h2>
+                <button class="modal-close" onclick="closeStatusModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Pedido: <strong id="modal-status-order-id"></strong></p>
+                <label>Nuevo estado:</label>
+                <select id="new-status" class="status-select">
+                    <option value="pending">Pendiente</option>
+                    <option value="preparing">En preparación</option>
+                    <option value="sent">Enviado</option>
+                    <option value="delivered">Entregado</option>
+                    <option value="cancelled">Cancelado</option>
+                </select>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-cancel" onclick="closeStatusModal()">Cancelar</button>
+                <button class="btn-save" onclick="saveNewStatus()">Guardar cambios</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentOrderId = null;
+
+        // Función para ver detalle de pedido
+        function viewOrder(orderId) {
+            const row = event.target.closest('tr');
+            const cells = row.querySelectorAll('td');
+            
+            document.getElementById('modal-order-id').textContent = cells[0].textContent;
+            document.getElementById('modal-user').textContent = cells[1].textContent;
+            document.getElementById('modal-date').textContent = cells[2].textContent;
+            document.getElementById('modal-status').textContent = cells[3].textContent;
+            document.getElementById('modal-total').textContent = cells[4].textContent;
+            
+            document.getElementById('detail-modal').style.display = 'block';
+        }
+
+        // Función para cambiar estado
+        function changeStatus(orderId) {
+            currentOrderId = orderId;
+            document.getElementById('modal-status-order-id').textContent = orderId;
+            document.getElementById('status-modal').style.display = 'block';
+        }
+
+        // Guardar nuevo estado
+        function saveNewStatus() {
+            const newStatus = document.getElementById('new-status').value;
+            const statusLabels = {
+                'pending': 'Pendiente',
+                'preparing': 'En preparación',
+                'sent': 'Enviado',
+                'delivered': 'Entregado',
+                'cancelled': 'Cancelado'
+            };
+
+            alert(`Estado del pedido ${currentOrderId} cambiado a: ${statusLabels[newStatus]}`);
+            closeStatusModal();
+        }
+
+        // Cerrar modales
+        function closeModal() {
+            document.getElementById('detail-modal').style.display = 'none';
+        }
+
+        function closeStatusModal() {
+            document.getElementById('status-modal').style.display = 'none';
+        }
+
+        // Cerrar modal al hacer click fuera
+        window.onclick = function(event) {
+            const detailModal = document.getElementById('detail-modal');
+            const statusModal = document.getElementById('status-modal');
+            
+            if (event.target == detailModal) {
+                detailModal.style.display = 'none';
+            }
+            if (event.target == statusModal) {
+                statusModal.style.display = 'none';
+            }
+        }
+
+        // Buscar pedidos
+        document.getElementById('search-input').addEventListener('keyup', function() {
+            const filter = this.value.toLowerCase();
+            const rows = document.querySelectorAll('#orders-body tr');
+            
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(filter) ? '' : 'none';
+            });
+        });
+
+        // Filtrar por estado
+        document.getElementById('status-filter').addEventListener('change', function() {
+            const filter = this.value;
+            const rows = document.querySelectorAll('#orders-body tr');
+            
+            rows.forEach(row => {
+                if (!filter) {
+                    row.style.display = '';
+                } else {
+                    const statusBadge = row.querySelector('.status-badge');
+                    const statusClass = statusBadge.className.match(/\b(pending|preparing|sent|delivered|cancelled)\b/)[0];
+                    row.style.display = statusClass === filter ? '' : 'none';
+                }
+            });
+        });
+
+        // Exportar tabla
+        function exportTable() {
+            alert('Tabla exportada a CSV');
+            // Aquí iría la lógica de exportación
+        }
+
+        // Paginación
+        function previousPage() {
+            alert('Ir a página anterior');
+        }
+
+        function nextPage() {
+            alert('Ir a página siguiente');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="admin-styles.css">
+    <title>FoodLink - Panel de Administración</title>
+</head>
+<body class="admin-body">
+    <!-- BARRA LATERAL -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <h2>FoodLink</h2>
+            <p class="sidebar-subtitle">Admin Panel</p>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="#" class="nav-item active">
+                <span class="nav-icon">📊</span>
+                <span>Dashboard</span>
+            </a>
+            <a href="#" class="nav-item">
+                <span class="nav-icon">👥</span>
+                <span>Usuarios</span>
+            </a>
+            <a href="#" class="nav-item">
+                <span class="nav-icon">🏪</span>
+                <span>Restaurantes</span>
+            </a>
+            <a href="./product-form.html" class="nav-item">
+                <span class="nav-icon">📦</span>
+                <span>Productos</span>
+            </a>
+            <a href="#" class="nav-item">
+                <span class="nav-icon">🛒</span>
+                <span>Pedidos</span>
+            </a>
+            <a href="#" class="nav-item">
+                <span class="nav-icon">📈</span>
+                <span>Estadísticas</span>
+            </a>
+            <a href="index.html" class="nav-item logout">
+                <span class="nav-icon">🚪</span>
+                <span>Cerrar sesión</span>
+            </a>
+        </nav>
+    </aside>
+
+    <!-- CONTENEDOR PRINCIPAL -->
+    <div class="main-container">
+        <!-- CABECERA SUPERIOR -->
+        <header class="admin-header">
+            <div class="header-left">
+                <h1>Panel de Administración</h1>
+                <p class="header-subtitle">Resumen general de la actividad de FoodLink</p>
+            </div>
+
+            <div class="header-right">
+                <div class="admin-info">
+                    <div class="notifications">
+                        <span class="notification-icon">🔔</span>
+                        <span class="notification-badge">3</span>
+                    </div>
+                    <div class="admin-profile">
+                        <div class="avatar">A</div>
+                        <div class="profile-info">
+                            <p class="admin-name">Admin User</p>
+                            <p class="admin-role">Administrador</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <main class="dashboard-content">
+            <!-- TARJETAS RESUMEN -->
+            <section class="summary-cards">
+                <div class="card">
+                    <div class="card-header">Usuarios registrados</div>
+                    <div class="card-number">248</div>
+                    <div class="card-footer">↑ 12 nuevos esta semana</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">Restaurantes activos</div>
+                    <div class="card-number">34</div>
+                    <div class="card-footer">↑ 2 nuevos esta semana</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">Productos publicados</div>
+                    <div class="card-number">512</div>
+                    <div class="card-footer">↑ 28 nuevos esta semana</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">Pedidos activos</div>
+                    <div class="card-number">27</div>
+                    <div class="card-footer">En tiempo real</div>
+                </div>
+            </section>
+
+            <!-- ACCESOS RÁPIDOS -->
+            <section class="quick-access">
+                <h2>Accesos Rápidos</h2>
+                <div class="access-buttons">
+                    <button class="access-btn" onclick="alert('Ir a Gestión de Usuarios')">
+                        <span class="btn-icon">👥</span>
+                        <span>Gestionar Usuarios</span>
+                    </button>
+                    <button class="access-btn" onclick="alert('Ir a Gestión de Restaurantes')">
+                        <span class="btn-icon">🏪</span>
+                        <span>Gestionar Restaurantes</span>
+                    </button>
+                    <button class="access-btn" onclick="alert('Ir a Gestión de Productos')">
+                        <span class="btn-icon">📦</span>
+                        <a href="./product-form.html" style="text-decoration: none; color: inherit;"><span>Gestionar Productos</span></a>
+                    </button>
+                    <button class="access-btn" onclick="alert('Ir a Ver Pedidos')">
+                        <span class="btn-icon">🛒</span>
+                        <a href="./orders-list.html" style="text-decoration: none; color: inherit;"><span>Ver Pedidos</span></a>
+                    </button>
+                    <button class="access-btn" onclick="alert('Generar Informe')">
+                        <span class="btn-icon">📄</span>
+                        <span>Generar Informe</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- DOS COLUMNAS: ACTIVIDAD RECIENTE Y PEDIDOS RECIENTES -->
+            <section class="dashboard-grid">
+                <!-- ACTIVIDAD RECIENTE -->
+                <div class="card-section">
+                    <h2>Actividad Reciente</h2>
+                    <table class="activity-table">
+                        <thead>
+                            <tr>
+                                <th>Acción</th>
+                                <th>Fecha</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Nuevo restaurante registrado</td>
+                                <td>12/10/2025</td>
+                            </tr>
+                            <tr>
+                                <td>Producto actualizado</td>
+                                <td>12/10/2025</td>
+                            </tr>
+                            <tr>
+                                <td>Pedido #1054 entregado</td>
+                                <td>12/10/2025</td>
+                            </tr>
+                            <tr>
+                                <td>Usuario desactivado</td>
+                                <td>11/10/2025</td>
+                            </tr>
+                            <tr>
+                                <td>Restaurante verificado</td>
+                                <td>11/10/2025</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- PEDIDOS RECIENTES -->
+                <div class="card-section">
+                    <h2>Pedidos Recientes</h2>
+                    <table class="orders-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Usuario</th>
+                                <th>Estado</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#1058</td>
+                                <td>Ana Ruiz</td>
+                                <td><span class="status preparing">En preparación</span></td>
+                                <td>18,50 €</td>
+                            </tr>
+                            <tr>
+                                <td>#1057</td>
+                                <td>Carlos Gil</td>
+                                <td><span class="status delivered">Entregado</span></td>
+                                <td>24,90 €</td>
+                            </tr>
+                            <tr>
+                                <td>#1056</td>
+                                <td>Marta López</td>
+                                <td><span class="status pending">Pendiente</span></td>
+                                <td>13,00 €</td>
+                            </tr>
+                            <tr>
+                                <td>#1055</td>
+                                <td>Jorge Martín</td>
+                                <td><span class="status delivering">En camino</span></td>
+                                <td>32,75 €</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Seleccionar todos los items de navegación
+        const navItems = document.querySelectorAll('.nav-item');
+
+        navItems.forEach(item => {
+            item.addEventListener('click', function(e) {
+                // No aplicar estilo active al cerrar sesión
+                if (!this.classList.contains('logout')) {
+                    e.preventDefault();
+                    
+                    // Remover clase active de todos los items
+                    navItems.forEach(nav => nav.classList.remove('active'));
+                    
+                    // Añadir clase active al item clickeado
+                    this.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

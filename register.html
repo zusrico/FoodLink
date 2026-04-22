@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>FoodLink - Registro</title>
+</head>
+<!-- Mockup de la página de registro -->
+<body>
+    <header>
+        <h1> <a href="/index.html">FoodLink</a></h1>
+        <h2>Tu comida favorita, más cerca que nunca</h2>
+    </header>
+    <main>
+        <form action="/register" method="post">
+            <label for="email">Correo Electrónico: <span style="color: red;">*</span></label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="username">Usuario: <span style="color: red;">*</span></label>
+            <input type="text" id="username" name="username" required>
+            
+            <label for="password">Contraseña: <span style="color: red;">*</span></label>
+            <input type="password" id="password" name="password" required>
+            
+            <label for="confirm-password">Confirmar Contraseña: <span style="color: red;">*</span></label>
+            <input type="password" id="confirm-password" name="confirm-password" required>
+
+            <label for="phone">Teléfono:</label>
+            <input type="tel" id="phone" name="phone" placeholder="(opcional)">
+            
+            <label for="address">Dirección:</label>
+            <input type="text" id="address" name="address" placeholder="(opcional)">
+            
+            <button type="submit">Crear Cuenta</button>
+        </form>
+        <!-- Enlace para volver al login -->
+        <p><a href="/index.html ">¿Ya tienes cuenta? Inicia sesión aquí</a></p>
+        <p>Al registrarse, aceptas nuestros términos y condiciones de servicio</p>
+    </main>
+    <footer class="footer">
+        <p>&copy; 2026 FoodLink. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>
