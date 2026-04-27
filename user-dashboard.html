@@ -1,11 +1,266 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel de Usuario</title>
+    <link rel="stylesheet" href="user-dashboard-styles.css">
+    <title>FoodLink - Mi Cuenta</title>
 </head>
-<body>
-    <h1>Panel de Usuario</h1>
+<body class="user-dashboard-body">
+    <!-- HEADER TOP NAV -->
+    <header class="top-navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <h1>FoodLink</h1>
+            </div>
+            
+            <div class="navbar-center">
+                <a href="#active-orders" class="nav-link">Mis Pedidos</a>
+                <a href="#favorites" class="nav-link">Favoritos</a>
+                <a href="#history" class="nav-link">Historial</a>
+            </div>
+
+            <div class="navbar-right">
+                <button class="notification-btn">
+                    🔔
+                    <span class="badge">2</span>
+                </button>
+                <div class="profile-menu">
+                    <button class="profile-btn">👤</button>
+                    <div class="profile-dropdown">
+                        <a href="#">Perfil</a>
+                        <a href="#">Direcciones</a>
+                        <a href="#">Configuración</a>
+                        <hr>
+                        <a href="index.html">Cerrar sesión</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="user-main">
+        <!-- HERO SECTION CON BOTÓN CTA -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <h2>¡Bienvenido, Juan!</h2>
+                <p>Pide comida deliciosa y recíbela en minutos</p>
+                <button class="btn-primary btn-large">🍕 Pedir Ahora</button>
+            </div>
+        </section>
+
+        <!-- PEDIDOS ACTIVOS -->
+        <section class="active-orders" id="active-orders">
+            <h2>Mis Pedidos Activos</h2>
+            
+            <div class="orders-container">
+                <!-- Pedido Activo 1 -->
+                <div class="order-card active">
+                    <div class="order-header">
+                        <div>
+                            <h3>Sushi Tokio</h3>
+                            <p class="order-time">Pedido hace 15 minutos</p>
+                        </div>
+                        <span class="order-status preparing">En camino</span>
+                    </div>
+                    
+                    <div class="order-details">
+                        <p><strong>Orden:</strong> #1058</p>
+                        <p><strong>Total:</strong> 31,00 €</p>
+                    </div>
+
+                    <div class="order-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 75%"></div>
+                        </div>
+                        <div class="progress-steps">
+                            <span class="step done">✓ Confirmado</span>
+                            <span class="step done">✓ Preparando</span>
+                            <span class="step active">🚗 Entregando</span>
+                            <span class="step">Entregado</span>
+                        </div>
+                    </div>
+
+                    <div class="order-actions">
+                        <button class="btn-secondary">📍 Rastrear</button>
+                        <button class="btn-secondary">💬 Contactar</button>
+                    </div>
+                </div>
+
+                <!-- Pedido Activo 2 -->
+                <div class="order-card active">
+                    <div class="order-header">
+                        <div>
+                            <h3>El Sabor Latino</h3>
+                            <p class="order-time">Pedido hace 5 minutos</p>
+                        </div>
+                        <span class="order-status preparing">Preparando</span>
+                    </div>
+                    
+                    <div class="order-details">
+                        <p><strong>Orden:</strong> #1057</p>
+                        <p><strong>Total:</strong> 18,50 €</p>
+                    </div>
+
+                    <div class="order-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 40%"></div>
+                        </div>
+                        <div class="progress-steps">
+                            <span class="step done">✓ Confirmado</span>
+                            <span class="step active">👨‍🍳 Preparando</span>
+                            <span class="step">Entregando</span>
+                            <span class="step">Entregado</span>
+                        </div>
+                    </div>
+
+                    <div class="order-actions">
+                        <button class="btn-secondary">📍 Rastrear</button>
+                        <button class="btn-secondary">💬 Contactar</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RESTAURANTES FAVORITOS -->
+        <section class="favorites" id="favorites">
+            <h2>Tus Favoritos</h2>
+            
+            <div class="restaurants-grid">
+                <div class="restaurant-card">
+                    <div class="restaurant-image">🍕</div>
+                    <h3>Pizza Perfecta</h3>
+                    <p class="rating">⭐ 4.8 (324)</p>
+                    <p class="delivery">📍 2.5 km • 25-35 min</p>
+                    <button class="btn-secondary">Ordenar</button>
+                </div>
+
+                <div class="restaurant-card">
+                    <div class="restaurant-image">🍔</div>
+                    <h3>Burguer House</h3>
+                    <p class="rating">⭐ 4.6 (189)</p>
+                    <p class="delivery">📍 1.2 km • 15-20 min</p>
+                    <button class="btn-secondary">Ordenar</button>
+                </div>
+
+                <div class="restaurant-card">
+                    <div class="restaurant-image">🍜</div>
+                    <h3>Thai Deluxe</h3>
+                    <p class="rating">⭐ 4.9 (512)</p>
+                    <p class="delivery">📍 3.1 km • 30-40 min</p>
+                    <button class="btn-secondary">Ordenar</button>
+                </div>
+
+                <div class="restaurant-card">
+                    <div class="restaurant-image">🍝</div>
+                    <h3>Pasta Bella</h3>
+                    <p class="rating">⭐ 4.7 (276)</p>
+                    <p class="delivery">📍 2.0 km • 20-30 min</p>
+                    <button class="btn-secondary">Ordenar</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- HISTORIAL DE PEDIDOS -->
+        <section class="order-history" id="history">
+            <h2>Historial de Pedidos</h2>
+            
+            <div class="history-list">
+                <div class="history-item completed">
+                    <div class="history-icon">✓</div>
+                    <div class="history-info">
+                        <h4>Pizza Perfecta</h4>
+                        <p>Orden #1056 • 12 de octubre</p>
+                        <p class="price">24,90 €</p>
+                    </div>
+                    <button class="btn-link">Repetir</button>
+                </div>
+
+                <div class="history-item completed">
+                    <div class="history-icon">✓</div>
+                    <div class="history-info">
+                        <h4>Burguer House</h4>
+                        <p>Orden #1055 • 11 de octubre</p>
+                        <p class="price">15,40 €</p>
+                    </div>
+                    <button class="btn-link">Repetir</button>
+                </div>
+
+                <div class="history-item completed">
+                    <div class="history-icon">✓</div>
+                    <div class="history-info">
+                        <h4>Thai Deluxe</h4>
+                        <p>Orden #1054 • 10 de octubre</p>
+                        <p class="price">22,60 €</p>
+                    </div>
+                    <button class="btn-link">Repetir</button>
+                </div>
+
+                <div class="history-item completed">
+                    <div class="history-icon">✓</div>
+                    <div class="history-info">
+                        <h4>Pasta Bella</h4>
+                        <p>Orden #1053 • 9 de octubre</p>
+                        <p class="price">19,80 €</p>
+                    </div>
+                    <button class="btn-link">Repetir</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROMOCIONES -->
+        <section class="promotions">
+            <h2>Ofertas Especiales</h2>
+            
+            <div class="promo-cards">
+                <div class="promo-card">
+                    <div class="promo-badge">20% OFF</div>
+                    <h3>Tu primer pedido</h3>
+                    <p>Código: FOODLINK20</p>
+                </div>
+
+                <div class="promo-card">
+                    <div class="promo-badge">$5 OFF</div>
+                    <h3>En pedidos mayores a $30</h3>
+                    <p>Válido esta semana</p>
+                </div>
+
+                <div class="promo-card">
+                    <div class="promo-badge">GRATIS</div>
+                    <h3>Envío gratis</h3>
+                    <p>Compras de $40 o más</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Navegación suave
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', e => {
+                e.preventDefault();
+                document.querySelector(link.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Botones principales
+        document.querySelector('.btn-large').addEventListener('click', () => alert('🍕 Abriendo catálogo...'));
+        
+        document.querySelectorAll('.restaurant-card .btn-secondary').forEach(btn => {
+            btn.addEventListener('click', () => alert('📱 Abriendo menú del restaurante...'));
+        });
+
+        document.querySelectorAll('.btn-link').forEach(btn => {
+            btn.addEventListener('click', () => alert('🔄 Repitiendo pedido...'));
+        });
+
+        document.querySelectorAll('.order-actions .btn-secondary').forEach(btn => {
+            btn.addEventListener('click', e => {
+                const action = e.target.textContent.includes('Rastrear') ? '📍 Rastreando...' : '💬 Contactando...';
+                alert(action);
+            });
+        });
+    </script>
 </body>
 </html>
