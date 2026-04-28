@@ -15,6 +15,7 @@
         </div>
 
         <nav class="sidebar-nav">
+            
             <a href="#" class="nav-item active">
                 <span class="nav-icon">📊</span>
                 <span>Dashboard</span>
@@ -31,7 +32,7 @@
                 <span class="nav-icon">📦</span>
                 <span>Productos</span>
             </a>
-            <a href="#" class="nav-item">
+            <a href="./orders-list.html" class="nav-item"> <!-- Link to orders list -->
                 <span class="nav-icon">🛒</span>
                 <span>Pedidos</span>
             </a>
@@ -105,22 +106,22 @@
             <section class="quick-access">
                 <h2>Accesos Rápidos</h2>
                 <div class="access-buttons">
-                    <button class="access-btn" onclick="alert('Ir a Gestión de Usuarios')">
+                    <button class="access-btn">
                         <span class="btn-icon">👥</span>
                         <span>Gestionar Usuarios</span>
                     </button>
-                    <button class="access-btn" onclick="alert('Ir a Gestión de Restaurantes')">
+                    <button class="access-btn">
                         <span class="btn-icon">🏪</span>
                         <span>Gestionar Restaurantes</span>
                     </button>
-                    <button class="access-btn" onclick="alert('Ir a Gestión de Productos')">
+                    <a href="./product-form.html" class="access-btn" style="text-decoration: none; color: white;">
                         <span class="btn-icon">📦</span>
-                        <a href="./product-form.html" style="text-decoration: none; color: inherit;"><span>Gestionar Productos</span></a>
-                    </button>
-                    <button class="access-btn" onclick="alert('Ir a Ver Pedidos')">
+                        <span>Gestionar Productos</span>
+                    </a>
+                    <a href="./orders-list.html" class="access-btn" style="text-decoration: none; color: white;">
                         <span class="btn-icon">🛒</span>
-                        <a href="./orders-list.html" style="text-decoration: none; color: inherit;"><span>Ver Pedidos</span></a>
-                    </button>
+                        <span>Ver Pedidos</span>
+                    </a>
                     <button class="access-btn" onclick="alert('Generar Informe')">
                         <span class="btn-icon">📄</span>
                         <span>Generar Informe</span>
