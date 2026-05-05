@@ -1,84 +1,103 @@
 <x-app-layout>
-    <x-slot name="header">
-        <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                {{ __('Productos') }}
-            </h2>
-            @if(auth()->user()->role === 'admin')
-                <a href="{{ route('productos.create') }}" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-                    + Nuevo Producto
-                </a>
-            @endif
+<body class="orders-body">
+    <div class="orders-container">
+        <div class="orders-header">
+            <h1>Listado de productos</h1>
+            <p class="orders-subtitle">Consulta y gestión de los productos registrados en la plataforma</p>
         </div>
-    </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            @if ($message = Session::get('success'))
-                <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
-                    {{ $message }}
-                </div>
-            @endif
+        @if ($message = Session::get('success'))
+            <div class="foodlink-alert foodlink-alert-success">{{ $message }}</div>
+        @endif
+        @if ($message = Session::get('error'))
+            <div class="foodlink-alert foodlink-alert-error">{{ $message }}</div>
+        @endif
 
-            @if ($message = Session::get('error'))
-                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-                    {{ $message }}
-                </div>
-            @endif
-
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="overflow-x-auto">
-                    <table class="w-full border-collapse">
-                        <thead class="bg-gray-100 dark:bg-gray-700">
-                            <tr>
-                                <th class="border px-6 py-3 text-left text-gray-900 dark:text-gray-100">Nombre</th>
-                                <th class="border px-6 py-3 text-left text-gray-900 dark:text-gray-100">Descripción</th>
-                                <th class="border px-6 py-3 text-left text-gray-900 dark:text-gray-100">Precio</th>
-                                <th class="border px-6 py-3 text-left text-gray-900 dark:text-gray-100">Stock</th>
-                                <th class="border px-6 py-3 text-left text-gray-900 dark:text-gray-100">Disponible</th>
-                                @if(auth()->user()->role === 'admin')
-                                    <th class="border px-6 py-3 text-center text-gray-900 dark:text-gray-100">Acciones</th>
-                                @endif
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y dark:divide-gray-700">
-                            @forelse($productos as $producto)
-                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
-                                    <td class="border px-6 py-4 text-gray-900 dark:text-gray-100">{{ $producto->nombre }}</td>
-                                    <td class="border px-6 py-4 text-gray-600 dark:text-gray-400">{{ Str::limit($producto->descripcion, 50) }}</td>
-                                    <td class="border px-6 py-4 text-gray-900 dark:text-gray-100">
-                                        <span class="font-semibold">${{ number_format($producto->precio, 2) }}</span>
-                                    </td>
-                                    <td class="border px-6 py-4 text-gray-900 dark:text-gray-100">{{ $producto->stock }}</td>
-                                    <td class="border px-6 py-4">
-                                        @if($producto->disponible)
-                                            <span class="px-2 py-1 bg-green-100 text-green-800 rounded text-sm">Sí</span>
-                                        @else
-                                            <span class="px-2 py-1 bg-red-100 text-red-800 rounded text-sm">No</span>
-                                        @endif
-                                    </td>
-                                    @if(auth()->user()->role === 'admin')
-                                        <td class="border px-6 py-4 text-center">
-                                            <a href="{{ route('productos.edit', $producto->id_producto) }}" class="text-blue-600 hover:text-blue-900 mr-2">Editar</a>
-                                            <form action="{{ route('productos.destroy', $producto->id_producto) }}" method="POST" style="display:inline;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="text-red-600 hover:text-red-900" onclick="return confirm('¿Está seguro?')">Eliminar</button>
-                                            </form>
-                                        </td>
-                                    @endif
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="{{ auth()->user()->role === 'admin' ? '6' : '5' }}" class="border px-6 py-4 text-center text-gray-500">
-                                        No hay productos registrados
-                                    </td>
-                                </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
-                </div>
+        <div class="filters-section">
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="Buscar producto" class="search-input">
+                <span class="search-icon">🔍</span>
+            </div>
+            <div class="filters-group">
+                <select id="status-filter" class="status-filter">
+                    <option value="">Todos</option>
+                    <option value="disponible">Disponible</option>
+                    <option value="no-disponible">No disponible</option>
+                </select>
+                @if(auth()->user()->role === 'admin')
+                    <a href="{{ route('productos.create') }}" class="btn-export" style="text-decoration:none;">➕ Nuevo producto</a>
+                @endif
             </div>
         </div>
+
+        <div class="table-wrapper">
+            <table class="orders-table" id="products-table">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Descripción</th>
+                        <th>Precio</th>
+                        <th>Stock</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="orders-body">
+                    @forelse($productos as $producto)
+                        <tr data-status="{{ $producto->disponible ? 'disponible' : 'no-disponible' }}">
+                            <td class="order-id">{{ $producto->nombre }}</td>
+                            <td>{{ \Illuminate\Support\Str::limit($producto->descripcion, 55) }}</td>
+                            <td class="amount">{{ number_format($producto->precio, 2, ',', '.') }} €</td>
+                            <td>{{ $producto->stock }}</td>
+                            <td>
+                                @if($producto->disponible)
+                                    <span class="status-badge delivered">Disponible</span>
+                                @else
+                                    <span class="status-badge cancelled">No disponible</span>
+                                @endif
+                            </td>
+                            <td class="actions product-actions">
+                                <a href="{{ route('productos.show', $producto->id_producto) }}" class="action-btn view-btn" title="Ver detalle">👁️</a>
+                                @if(auth()->user()->role === 'admin')
+                                    <a href="{{ route('productos.edit', $producto->id_producto) }}" class="action-btn edit-btn" title="Editar">✏️</a>
+                                    <form action="{{ route('productos.destroy', $producto->id_producto) }}" method="POST" class="inline-form">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="action-btn delete-btn" onclick="return confirm('¿Está seguro de que desea eliminar este producto?')" title="Eliminar">🗑️</button>
+                                    </form>
+                                @endif
+                            </td>
+                        </tr>
+                    @empty
+                        <tr><td colspan="6" style="text-align:center; padding:2rem; color:#7f8c8d;">No hay productos registrados</td></tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+
+        <div class="pagination">
+            <a href="{{ route('dashboard') }}" class="page-btn" style="text-decoration:none;">← Dashboard</a>
+            <button class="page-btn active">1</button>
+        </div>
     </div>
+
+    <script>
+        const searchInput = document.getElementById('search-input');
+        const statusFilter = document.getElementById('status-filter');
+        const rows = document.querySelectorAll('#orders-body tr');
+        function filterRows() {
+            const search = searchInput.value.toLowerCase();
+            const status = statusFilter.value;
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                const rowStatus = row.getAttribute('data-status');
+                const matchSearch = text.includes(search);
+                const matchStatus = !status || rowStatus === status;
+                row.style.display = matchSearch && matchStatus ? '' : 'none';
+            });
+        }
+        searchInput.addEventListener('input', filterRows);
+        statusFilter.addEventListener('change', filterRows);
+    </script>
+</body>
 </x-app-layout>

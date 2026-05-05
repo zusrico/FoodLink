@@ -1,52 +1,51 @@
 <x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
-        @csrf
+    <header>
+        <h1><a href="{{ url('/') }}">FoodLink</a></h1>
+        <h2>Tu comida favorita, más cerca que nunca</h2>
+    </header>
 
-        <!-- Name -->
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
-        </div>
+    <main>
+        <form method="POST" action="{{ route('register') }}" @if($errors->any()) class="shaker" @endif>
+            @csrf
 
-        <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+            <label for="email">Correo Electrónico: <span style="color:red;">*</span></label>
+            <input type="email" id="email" name="email" value="{{ old('email') }}" required autocomplete="username">
+            @error('email')
+                <span class="error-message">{{ $message }}</span>
+            @enderror
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+            <label for="name">Usuario: <span style="color:red;">*</span></label>
+            <input type="text" id="name" name="name" value="{{ old('name') }}" required autofocus autocomplete="name">
+            @error('name')
+                <span class="error-message">{{ $message }}</span>
+            @enderror
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
+            <label for="password">Contraseña: <span style="color:red;">*</span></label>
+            <input type="password" id="password" name="password" required autocomplete="new-password">
+            @error('password')
+                <span class="error-message">{{ $message }}</span>
+            @enderror
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
+            <label for="password_confirmation">Confirmar Contraseña: <span style="color:red;">*</span></label>
+            <input type="password" id="password_confirmation" name="password_confirmation" required autocomplete="new-password">
+            @error('password_confirmation')
+                <span class="error-message">{{ $message }}</span>
+            @enderror
 
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+            <label for="phone">Teléfono:</label>
+            <input type="tel" id="phone" name="phone" value="{{ old('phone') }}" placeholder="(opcional)">
 
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
+            <label for="address">Dirección:</label>
+            <input type="text" id="address" name="address" value="{{ old('address') }}" placeholder="(opcional)">
 
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
+            <button type="submit">Crear Cuenta</button>
+        </form>
 
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
-            </a>
+        <p><a href="{{ route('login') }}">¿Ya tienes cuenta? Inicia sesión aquí</a></p>
+        <p>Al registrarse, aceptas nuestros términos y condiciones de servicio</p>
+    </main>
 
-            <x-primary-button class="ms-4">
-                {{ __('Register') }}
-            </x-primary-button>
-        </div>
-    </form>
+    <footer class="footer">
+        <p>&copy; 2026 FoodLink. Todos los derechos reservados.</p>
+    </footer>
 </x-guest-layout>

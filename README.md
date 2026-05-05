@@ -1,157 +1,52 @@
-# 🍔 FoodLink - Sistema de Gestión de Productos
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-Un aplicativo web completo para la gestión de productos de comida, desarrollado con Laravel 12 y Blade templates. Incluye autenticación de usuarios, control de roles y CRUD funcional.
+<p align="center">
+<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+</p>
 
-## ✨ Características
+## About Laravel
 
-- ✅ **Autenticación completa** con Laravel Breeze (login, registro, recuperación de contraseña)
-- ✅ **CRUD de Productos** (crear, leer, actualizar, eliminar)
-- ✅ **Control de Roles** (admin y usuario regular)
-- ✅ **Validación de formularios** con mensajes de error
-- ✅ **Interface responsiva** con Tailwind CSS
-- ✅ **Base de datos SQLite** con migraciones
-- ✅ **Dashboard protegido** solo para usuarios autenticados
+Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-## 🛠️ Requisitos
+- [Simple, fast routing engine](https://laravel.com/docs/routing).
+- [Powerful dependency injection container](https://laravel.com/docs/container).
+- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
+- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
+- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
+- [Robust background job processing](https://laravel.com/docs/queues).
+- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-- PHP 8.2+
-- Composer 2.0+
-- XAMPP o servidor equivalente
-- Git
+Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## 📦 Instalación
+## Learning Laravel
 
-### 1. Clonar el repositorio
-```bash
-git clone https://github.com/zusrico/FoodLink.git
-cd FoodLink
-git checkout EAP2
-```
+Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
 
-### 2. Instalar dependencias
-```bash
-composer install
-```
+If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-### 3. Configurar variables de entorno
-```bash
-cp .env.example .env
-php artisan key:generate
-```
+## Laravel Sponsors
 
-### 4. Ejecutar migraciones
-```bash
-php artisan migrate
-```
+We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
 
-### 5. Iniciar el servidor
-```bash
-php artisan serve --host=127.0.0.1 --port=8000
-```
+### Premium Partners
 
-Accede a: `http://127.0.0.1:8000`
+- **[Vehikl](https://vehikl.com)**
+- **[Tighten Co.](https://tighten.co)**
+- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
+- **[64 Robots](https://64robots.com)**
+- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
+- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
+- **[Redberry](https://redberry.international/laravel-development)**
+- **[Active Logic](https://activelogic.com)**
 
-## 👤 Usuarios de Prueba
+## Contributing
 
-| Email | Contraseña | Rol |
-|-------|-----------|-----|
-| admin@foodlink.test | password | Admin |
-| usuario@foodlink.test | password | User |
+Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-## 🎯 Funcionalidades Principales
-
-### Para Administrador
-- Crear nuevos productos
-- Editar productos existentes
-- Eliminar productos
-- Ver lista completa de productos
-- Ver detalles de cada producto
-
-### Para Usuario Regular
-- Ver lista de productos
-- Ver detalles de productos
-- **No puede** crear, editar ni eliminar productos
-
-## 📁 Estructura del Proyecto
-
-```
-FoodLink/
-├── app/
-│   ├── Models/
-│   │   ├── User.php (con campo role)
-│   │   └── Producto.php
-│   └── Http/Controllers/
-│       ├── ProductoController.php
-│       └── Auth/*
-├── routes/
-│   ├── web.php
-│   └── auth.php
-├── database/
-│   └── migrations/
-├── resources/views/
-│   ├── layouts/
-│   ├── productos/
-│   └── auth/
-└── public/
-```
-
-## 🔐 Control de Acceso
-
-- **Rutas protegidas**: Todas las funciones requieren autenticación
-- **CRUD protegido por rol**: Solo admins pueden crear, editar y eliminar
-- **UI condicional**: Los botones de admin se ocultan para usuarios regulares
-
-## 🛢️ Base de Datos
-
-La aplicación utiliza SQLite con las siguientes tablas:
-
-- **users**: Usuarios del sistema (con campo `role`)
-- **productos**: Catálogo de productos
-- **cache** y **jobs**: Tablas de soporte
-
-## 🎨 Tecnologías
-
-| Tecnología | Versión |
-|-----------|---------|
-| Laravel | 12.58.0 |
-| PHP | 8.2.12 |
-| Tailwind CSS | 4 (CDN) |
-| SQLite | Default |
-| Blade | 12 |
-
-## 📖 Documentación Adicional
-
-- `RESUMEN_FINAL.md` - Resumen ejecutivo y validación
-- `PRUEBAS_SISTEMA.md` - Plan completo de pruebas
-
-## 🚀 Deployment
-
-Para usar en producción:
-1. Configurar variables de entorno en servidor
-2. Usar base de datos MySQL/PostgreSQL en lugar de SQLite
-3. Configurar Tailwind CSS con build tools
-4. Ejecutar: `php artisan config:cache`
-5. Ejecutar: `php artisan route:cache`
-
-## 📝 Notas
-
-- El proyecto usa Tailwind CSS vía CDN para desarrollo rápido
-- Las contraseñas están hasheadas con bcrypt
-- Todos los formularios incluyen protección CSRF
-- Validación server-side implementada
-
-## ✅ Estado
-
-**Proyecto completado y funcionando correctamente**
-- ✅ Autenticación: 100%
-- ✅ CRUD: 100%
-- ✅ Control de roles: 100%
-- ✅ Validación: 100%
-- ✅ Testing: Completado
-
----
-
-**Desarrollado para Práctica 2 de Programación Web**
+## Code of Conduct
 
 In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
