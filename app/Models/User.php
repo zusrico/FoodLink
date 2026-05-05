@@ -20,9 +20,14 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'apellidos',
         'email',
         'password',
         'role',
+        'telefono',
+        'direccion',
+        'rif',
+        'estado',
     ];
 
     /**
@@ -46,5 +51,13 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Relación: Un usuario puede tener muchos pedidos
+     */
+    public function pedidos()
+    {
+        return $this->hasMany(Pedido::class, 'id_usuario');
     }
 }
