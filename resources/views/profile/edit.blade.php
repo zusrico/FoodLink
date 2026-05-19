@@ -1,29 +1,53 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Profile') }}
-        </h2>
-    </x-slot>
-
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-profile-information-form')
-                </div>
+<body class="user-dashboard-body">
+    <nav class="top-navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo"><h1>FoodLink</h1></div>
+            <div class="navbar-center">
+                <a href="{{ route('dashboard') }}" class="nav-link">Inicio</a>
+                <a href="#restaurantes" class="nav-link">Restaurantes</a>
+                <a href="#history" class="nav-link">Mis pedidos</a>
+                <a href="{{ route('profile.edit') }}" class="nav-link">Mi perfil</a>
             </div>
-
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-password-form')
-                </div>
-            </div>
-
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.delete-user-form')
+            <div class="navbar-right">
+                <button class="notification-btn">🔔<span class="badge">2</span></button>
+                <div class="profile-menu">
+                    <button class="profile-btn">👤</button>
+                    <div class="profile-dropdown">
+                        <a href="{{ route('profile.edit') }}">Mi perfil</a>
+                        <hr>
+                        <form method="POST" action="{{ route('logout') }}">@csrf<button type="submit" class="button-as-link" style="padding:.75rem 1.5rem; width:100%; text-align:left;">Cerrar sesión</button></form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </nav>
+
+    <main class="user-main">
+        <section class="profile-section">
+            <div class="profile-container">
+                <div class="profile-header">
+                    <h1>Mi Perfil</h1>
+                    <p class="profile-subtitle">Gestiona tu información personal y seguridad</p>
+                </div>
+
+                <div class="profile-card">
+                    <h2>Información personal</h2>
+                    @include('profile.partials.update-profile-information-form')
+                </div>
+
+                <div class="profile-card">
+                    <h2>Cambiar contraseña</h2>
+                    @include('profile.partials.update-password-form')
+                </div>
+
+                <div class="profile-card delete-card">
+                    <h2>Eliminar cuenta</h2>
+                    @include('profile.partials.delete-user-form')
+                </div>
+            </div>
+        </section>
+    </main>
+
+</body>
 </x-app-layout>

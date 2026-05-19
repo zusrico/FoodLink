@@ -16,8 +16,10 @@ Route::middleware('auth')->group(function () {
         return view('dashboard');
     })->name('dashboard');
 
-    // Rutas de productos
-    Route::resource('productos', ProductoController::class);
+    // Rutas de productos - solo para administradores
+    Route::middleware('admin')->group(function () {
+        Route::resource('productos', ProductoController::class);
+    });
 });
 
 // Rutas de autenticación de Breeze

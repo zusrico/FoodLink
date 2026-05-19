@@ -1601,6 +1601,9 @@ html {
     min-height: 100vh;
     padding: 2rem 1rem;
     color: #333;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 /* =====================
@@ -2027,6 +2030,140 @@ html {
 }
 
 .btn-save:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(102, 126, 234, 0.3);
+}
+
+/* =====================
+   PROFILE PAGE
+   ===================== */
+
+.profile-section {
+    padding: 0 1.5rem 2rem;
+    margin-bottom: 2rem;
+}
+
+.profile-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 2rem 1.5rem;
+}
+
+.profile-header h1 {
+    font-size: 2rem;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.profile-subtitle {
+    font-size: 1rem;
+    color: #7f8c8d;
+}
+
+.profile-container {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.profile-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.profile-card h2 {
+    font-size: 1.2rem;
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 1rem;
+}
+
+.profile-card.delete-card {
+    border-left: 4px solid #e74c3c;
+}
+
+.profile-card.delete-card h2 {
+    color: #e74c3c;
+}
+
+/* Profile Form Elements */
+.profile-card header {
+    margin-bottom: 1.5rem;
+}
+
+.profile-card header h2 {
+    border-bottom: none;
+    padding-bottom: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.profile-card header p {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.profile-card section {
+    padding: 0;
+    margin: 0;
+}
+
+.profile-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.profile-card form > div {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-card label {
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.profile-card input[type="text"],
+.profile-card input[type="email"],
+.profile-card input[type="password"] {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 0.75rem;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.profile-card input[type="text"]:focus,
+.profile-card input[type="email"]:focus,
+.profile-card input[type="password"]:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.profile-card button[type="submit"] {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    align-self: flex-start;
+}
+
+.profile-card button[type="submit"]:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 16px rgba(102, 126, 234, 0.3);
 }

@@ -101,8 +101,9 @@
             <div class="navbar-logo"><h1>FoodLink</h1></div>
             <div class="navbar-center">
                 <a href="{{ route('dashboard') }}" class="nav-link">Inicio</a>
-                <a href="{{ route('productos.index') }}" class="nav-link">Restaurantes</a>
+                <a href="#restaurantes" class="nav-link">Restaurantes</a>
                 <a href="#history" class="nav-link">Mis pedidos</a>
+                <a href="{{ route('profile.edit') }}" class="nav-link">Mi perfil</a>
             </div>
             <div class="navbar-right">
                 <button class="notification-btn">🔔<span class="badge">2</span></button>
